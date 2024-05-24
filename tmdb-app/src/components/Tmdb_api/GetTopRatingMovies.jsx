@@ -13,7 +13,7 @@ const GetTopRatingMovies = (props) => {
             }
         };
 
-        fetch('https://api.themoviedb.org/3/tv/popular?language=fr-FR&page=1', options)
+        fetch("https://api.themoviedb.org/3/movie/top_rated?language=fr-FR&page=1", options)
             .then(response => response.json())
             .then(response => props.setData(response.results))
             .catch(err => console.error(err));
