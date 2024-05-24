@@ -10,6 +10,7 @@ function SevenArtRating() {
     const [answered, setAnswered] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [totalQuestions, setTotalQuestions] = useState(0);
+    const [clickedIndex, setClickedIndex] = useState(null);
 
     useEffect(() => {
         if (dataTopRates.length > 0) {
@@ -23,6 +24,7 @@ function SevenArtRating() {
             setIndexMovie(indexMovie + 2);
             setAnswered(false);
             setSelectedAnswer(null);
+            setClickedIndex(null);
         }
     };
 
@@ -37,14 +39,16 @@ function SevenArtRating() {
 
             if ((selectedAnswer === 0 && movie1.vote_average > movie2.vote_average) ||
                 (selectedAnswer === 1 && movie2.vote_average > movie1.vote_average)) {
-                setCorrectAnswers(correctAnswers + 1); // Increment correct answers
+                setCorrectAnswers(correctAnswers + 1);
             }
-            // Always increment total questions whether the answer is correct or not
-            setTotalQuestions(totalQuestions + 1); // Increment total questions
+            setTotalQuestions(totalQuestions + 1);
             setAnswered(true);
         }
     };
 
+    const handleClick = (index) => {
+        setClickedIndex(index);
+    };
 
     return (
         <div>
@@ -63,11 +67,14 @@ function SevenArtRating() {
                         {dataTopRates.slice(indexMovie, indexMovie + 2).map((movie, index) => (
                             <img
                                 key={movie.id}
-                                onClick={() => checkAnswer(index)}
+                                onClick={() => {
+                                    checkAnswer(index);
+                                    handleClick(index);
+                                }}
                                 disabled={answered}
                                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                                 alt={movie.title}
-                                className={`img-movie ${selectedAnswer === index ? "selected" : ""} ${answered && selectedAnswer === index ? (selectedAnswer === 0 && movie.vote_average > dataTopRates[indexMovie + 1].vote_average) || (selectedAnswer === 1 && movie.vote_average > dataTopRates[indexMovie].vote_average) ? "green" : "red" : ""}`}
+                                className={`img-movie ${!answered && clickedIndex === index ? "blue" : ""}  ${answered && selectedAnswer === index ? (selectedAnswer === 0 && movie.vote_average > dataTopRates[indexMovie + 1].vote_average) || (selectedAnswer === 1 && movie.vote_average > dataTopRates[indexMovie].vote_average) ? "green" : "red" : ""}`}
                             />
                         ))}
                     </div>
@@ -96,3 +103,6 @@ function SevenArtRating() {
 }
 
 export default SevenArtRating;
+
+
+
