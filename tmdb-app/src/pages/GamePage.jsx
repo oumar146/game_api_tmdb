@@ -1,9 +1,10 @@
 import React from 'react';
+import Game1 from '../components/SevenArtRating';
 
 function GamePage() {
     return (
         <div>
-            Game Page
+            <Game1 />
         </div>
     );
 }
