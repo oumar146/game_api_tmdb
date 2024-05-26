@@ -1,7 +1,6 @@
 // Importation des bibliothèques et composants nécessaires
 import React, { useState, useEffect, useMemo } from "react";
 import GetTopRatingMovies from "../Tmdb_api/GetTopRatingMovies";
-import Header from "../Header";
 import FinishGame from "./FinishGame";
 import '../../styles/global/main.css';
 import '../../styles/global/header.css';
@@ -81,7 +80,6 @@ function SaYears() {
         <div>
             {/* Récupération des films les mieux notés */}
             <GetTopRatingMovies setData={setDataTopRates} />
-            <Header />
             <main>
                 {finished ? ( // Afficher FinishGame si le jeu est terminé
                     <FinishGame
@@ -90,7 +88,7 @@ function SaYears() {
                     />
                 ) : (
                     <>
-                        <div id="hero">
+                        <div id="container">
                             <p className="question">Quelle est l'année du film ci-dessous ?</p>
                         </div>
 

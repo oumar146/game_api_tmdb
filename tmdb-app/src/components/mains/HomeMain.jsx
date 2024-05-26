@@ -1,25 +1,27 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // import "../styles/header.css";
 function HomeMain() {
   return (
     <main>
-      <h2>A quels jeux jouerez-vous ?</h2>
+      <h2 h2 > A quels jeux jouerez - vous ?</h2 >
       <div class="games-categories">
         <div class="game">
           <h3 class="replies">Seventh Art Rating</h3>
           <p class="comment">Trouvez le film le mieux noté</p>
-          <a href="games/sa-ratings.html">
+          <NavLink to='/game/SaRatings'
+          >
             <button class="card-button">Jouer</button>
-          </a>
+          </NavLink>
         </div>
 
         <div class="game">
           <h3>Seventh Art Years</h3>
           <p class="comment">Trouvez l'année de sortie du film</p>
-          <a href="games/sa-years.html">
+          <NavLink to='/game/SaYears'
+          >
             <button class="card-button">Jouer</button>
-          </a>
+          </NavLink>
         </div>
         <div class="game">
           <h3>Seventh Art Lines</h3>
@@ -55,7 +57,7 @@ function HomeMain() {
           </a>
         </div>
       </div>
-    </main>
+    </main >
   );
 }
 

@@ -1,7 +1,6 @@
 // Importation des bibliothèques et composants nécessaires
 import React, { useState, useEffect } from "react";
 import GetTopRatingMovies from "../Tmdb_api/GetTopRatingMovies";
-import Header from "../Header";
 import FinishGame from "./FinishGame";
 
 function SaRatings() {
@@ -57,7 +56,6 @@ function SaRatings() {
     <div>
       {/* Récupération des films les mieux notés */}
       <GetTopRatingMovies setData={setDataTopRates} />
-      <Header />
       <main>
         {finished ? ( // Afficher FinishGame si le jeu est terminé
           <FinishGame
@@ -66,7 +64,7 @@ function SaRatings() {
           />
         ) : (
           <div>
-            <div id="hero">
+            <div id="container">
               <p className="question">Quel est le film le mieux noté ?</p>
             </div>
             <div className="game-data">

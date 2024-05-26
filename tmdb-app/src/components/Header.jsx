@@ -4,41 +4,28 @@ import { NavLink } from "react-router-dom";
 import "../styles/global/main.css";
 import "../styles/global/navbar.css";
 import "../styles/global/header.css";
-
 // import hero from "../images/hero.jpg";
 
-function Header() {
+function Header(props) {
   return (
     <header>
       <div id="navbar" class="">
         <div id="logo">
-          <a href="index.html">The Seventh Art Game</a>
+          <NavLink to='/home'>The Seventh Art Game</NavLink>
         </div>
         <ul class="nav-links">
           <li>
-            <a href="index.html">Accueil</a>
+            <NavLink to='/home'>Accueil</NavLink>
           </li>
           <li>
-            <a href="rules.html">Comment Jouer ?</a>
+            <NavLink to='/rules'>Comment Jouer ?</NavLink>
           </li>
           <li>
-            <a href="index.html#game-anchor">Lancer une partie</a>
+            <a href="#game-anchor">Lancer une partie</a>
           </li>
         </ul>
       </div>
-
-      <div id="hero">
-        <h1>A quel point connaissez-vous le septième art ?</h1>
-        <p>Découvrez-le en jouant à nos divers jeux</p>
-        <div class="cta">
-          <a href="rules.html">
-            <button class="btn rules">Comment Jouer ?</button>
-          </a>
-          <a href="index.html#game-anchor">
-            <button class="btn launch">Lancer une partie</button>
-          </a>
-        </div>
-      </div>
+      {props && props.children}
     </header>
   );
 }
