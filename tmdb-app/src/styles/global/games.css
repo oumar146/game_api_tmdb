@@ -1,0 +1,142 @@
+.question {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.question-image {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/*Answers*/
+
+.answers {
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+  align-items: stretch;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+
+  border-radius: 20px;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+
+  width: 40%;
+  position: relative;
+  padding: 1rem;
+  border: 5px solid #494949;
+  transition: 0.5s ease-out;
+  overflow: visible;
+}
+
+/*Buttons colors*/
+
+.mode {
+  background-color: #242424;
+}
+
+.score {
+  background-color: #0362c1;
+}
+
+.validation {
+  background-color: rgb(229, 9, 20);
+}
+
+.questions {
+  background-color: #00a056;
+}
+
+/*Color effects*/
+.red {
+  border: 4px solid #cc0000;
+}
+
+.green {
+  border: 4px solid #00a056;
+}
+/*Hover effects*/
+
+.white:hover {
+  border-color: white;
+  box-shadow: 0 4px 18px 0 white;
+}
+
+.blue:hover {
+  border-color: #007fff;
+  box-shadow: 0 4px 18px 0 #007fff;
+}
+
+.red:hover {
+  border-color: #cc0000;
+  box-shadow: 0 4px 18px 0 #cc0000;
+}
+
+.green:hover {
+  border-color: #00a056;
+  box-shadow: 0 4px 18px 0 #00a056;
+}
+
+img.green:hover {
+  border: 2px solid #00a056;
+}
+
+img.blue:hover {
+  border: 2px solid #007fff;
+}
+
+img.red:hover {
+  border: 2px solid #cc0000;
+}
+
+img.white:hover {
+  border: 2px solid white;
+}
+
+/*Game Buttons and data*/
+
+.game-data,
+.game-buttons {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 10px;
+  font-size: 18px;
+}
+
+.game-data *,
+.game-buttons * {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+
+  color: white;
+  font-family: Oswald;
+  font-weight: bold;
+}
+
+.game-buttons button {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.game-buttons *:hover {
+  opacity: 0.7;
+}

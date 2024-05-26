@@ -1,10 +1,13 @@
-import React from 'react';
-import Game1 from '../components/SevenArtRating';
+import Header from '../components/Header';
+import '../styles/global/main.css';
+import '../styles/global/header.css';
+import '../styles/global/games.css';
+import '../styles/games/game-model-2.css';
 
 function GamePage() {
     return (
         <div>
-            <Game1 />
+            <Header />
         </div>
     );
 }

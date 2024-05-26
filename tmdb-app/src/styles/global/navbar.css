@@ -1,0 +1,43 @@
+#navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 50px;
+  font-family: Playfair Display;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background-color 0.5s, padding 0.5s;
+  z-index: 1;
+}
+
+.scrolled {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 50px;
+  background-color: #333333;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #007fff;
+}
+
+#logo {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
