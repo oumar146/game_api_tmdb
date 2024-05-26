@@ -1,3 +1,4 @@
+// Importation des bibliothèques et composants nécessaires
 import React, { useState, useEffect, useMemo } from "react";
 import GetTopRatingMovies from "../Tmdb_api/GetTopRatingMovies";
 import Header from "../Header";
@@ -8,14 +9,16 @@ import '../../styles/global/games.css';
 import '../../styles/games/game-model-2.css';
 
 function SaYears() {
+    // Déclaration des états
     const [dataTopRates, setDataTopRates] = useState([]);
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
     const [answered, setAnswered] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [totalQuestions, setTotalQuestions] = useState(0);
-    const [finished, setFinished] = useState(false); // Add state for tracking game completion
+    const [finished, setFinished] = useState(false); // État pour suivre la fin du jeu
 
+    // Effet pour réinitialiser la réponse et la sélection lorsqu'on obtient de nouvelles données
     useEffect(() => {
         if (dataTopRates.length > 0) {
             setAnswered(false);
@@ -23,6 +26,7 @@ function SaYears() {
         }
     }, [dataTopRates]);
 
+    // Génère des années réalistes autour de l'année correcte
     const generateRealisticYears = (correctYear) => {
         const years = new Set();
         years.add(correctYear);
@@ -33,6 +37,7 @@ function SaYears() {
         return Array.from(years).sort();
     };
 
+    // Mémorise les années possibles pour la question actuelle
     const yearsForCurrentQuestion = useMemo(() => {
         if (dataTopRates.length > 0) {
             const correctYear = parseInt(dataTopRates[currentMovieIndex].release_date.split('-')[0]);
@@ -41,16 +46,18 @@ function SaYears() {
         return [];
     }, [currentMovieIndex, dataTopRates]);
 
+    // Fonction pour passer à la question suivante
     const switchQuestion = () => {
         if (currentMovieIndex + 1 < dataTopRates.length) {
             setCurrentMovieIndex(currentMovieIndex + 1);
             setAnswered(false);
             setSelectedAnswer(null);
         } else {
-            setFinished(true); // Set the game as finished when no more questions are available
+            setFinished(true); // Marquer le jeu comme terminé s'il n'y a plus de questions
         }
     };
 
+    // Fonction pour valider la réponse sélectionnée
     const validateAnswer = () => {
         if (selectedAnswer !== null && !answered) {
             const movie = dataTopRates[currentMovieIndex];
@@ -63,6 +70,7 @@ function SaYears() {
         }
     };
 
+    // Gérer le clic sur une réponse
     const handleAnswerClick = (year) => {
         if (!answered) {
             setSelectedAnswer(year);
@@ -71,10 +79,11 @@ function SaYears() {
 
     return (
         <div>
+            {/* Récupération des films les mieux notés */}
             <GetTopRatingMovies setData={setDataTopRates} />
             <Header />
             <main>
-                {finished ? ( // Conditionally render FinishGame if the game is finished
+                {finished ? ( // Afficher FinishGame si le jeu est terminé
                     <FinishGame
                         totalQuestions={totalQuestions}
                         correctAnswers={correctAnswers}
@@ -101,6 +110,7 @@ function SaYears() {
                                 </div>
 
                                 <div className="answers">
+                                    {/* Affichage des années à sélectionner */}
                                     {yearsForCurrentQuestion.map((year, index) => (
                                         <div
                                             key={index}
@@ -111,8 +121,6 @@ function SaYears() {
                                         </div>
                                     ))}
                                 </div>
-
-
                             </>
                         )}
 
