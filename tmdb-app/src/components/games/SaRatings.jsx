@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GetTopRatingMovies from "../Tmdb_api/GetTopRatingMovies";
 import Header from "../Header";
-
+import FinishGame from "./FinishGame";
 
 function SaRatings() {
   const [dataTopRates, setDataTopRates] = useState([]);
@@ -11,6 +11,7 @@ function SaRatings() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [clickedIndex, setClickedIndex] = useState(null);
+  const [finished, setFinished] = useState(false); // New state for tracking game completion
 
   useEffect(() => {
     if (dataTopRates.length > 0) {
@@ -25,6 +26,8 @@ function SaRatings() {
       setAnswered(false);
       setSelectedAnswer(null);
       setClickedIndex(null);
+    } else {
+      setFinished(true); // Set the game as finished when no more questions are available
     }
   };
 
@@ -55,48 +58,57 @@ function SaRatings() {
       <GetTopRatingMovies setData={setDataTopRates} />
       <Header />
       <main>
-        <div id="hero">
-          <p className="question">Quel est le film le mieux noté ?</p>
-        </div>
-        <div className="game-data">
-          <div className="score">Score : {correctAnswers}</div>
-          <div className="questions">Question : {correctAnswers}/{totalQuestions}</div>
-        </div>
-        {dataTopRates.length > 0 && (
-          <div className="question-image">
-            {dataTopRates.slice(indexMovie, indexMovie + 2).map((movie, index) => (
-              <img
-                key={movie.id}
-                onClick={() => {
-                  checkAnswer(index);
-                  handleClick(index);
-                }}
-                disabled={answered}
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
-                className={`white img-movie ${answered && selectedAnswer === index ? (selectedAnswer === 0 && movie.vote_average > dataTopRates[indexMovie + 1].vote_average) || (selectedAnswer === 1 && movie.vote_average > dataTopRates[indexMovie].vote_average) ? "green" : "red" : ""}`}
-              />
-            ))}
+        {finished ? ( // Conditionally render FinishGame if the game is finished
+          <FinishGame
+            totalQuestions={totalQuestions}
+            correctAnswers={correctAnswers}
+          />
+        ) : (
+          <div>
+            <div id="hero">
+              <p className="question">Quel est le film le mieux noté ?</p>
+            </div>
+            <div className="game-data">
+              <div className="score">Score : {correctAnswers}</div>
+              <div className="questions">Question : {correctAnswers}/{totalQuestions}</div>
+            </div>
+            {dataTopRates.length > 0 && (
+              <div className="question-image">
+                {dataTopRates.slice(indexMovie, indexMovie + 2).map((movie, index) => (
+                  <img
+                    key={movie.id}
+                    onClick={() => {
+                      checkAnswer(index);
+                      handleClick(index);
+                    }}
+                    disabled={answered}
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.title}
+                    className={`white img-movie ${answered && selectedAnswer === index ? (selectedAnswer === 0 && movie.vote_average > dataTopRates[indexMovie + 1].vote_average) || (selectedAnswer === 1 && movie.vote_average > dataTopRates[indexMovie].vote_average) ? "green" : "red" : ""}`}
+                  />
+                ))}
+              </div>
+            )}
+            <div className="game-buttons">
+              <button
+                type="button"
+                className="validation"
+                onClick={validateAnswer}
+                disabled={answered || selectedAnswer === null}
+              >
+                Valider la réponse
+              </button>
+              <button
+                type="button"
+                className="questions"
+                onClick={switchQuestion}
+                disabled={!answered}
+              >
+                Question suivante
+              </button>
+            </div>
           </div>
         )}
-        <div className="game-buttons">
-          <button
-            type="button"
-            className="validation"
-            onClick={validateAnswer}
-            disabled={answered || selectedAnswer === null}
-          >
-            Valider la réponse
-          </button>
-          <button
-            type="button"
-            className="questions"
-            onClick={switchQuestion}
-            disabled={!answered}
-          >
-            Question suivante
-          </button>
-        </div>
       </main>
     </div>
   );

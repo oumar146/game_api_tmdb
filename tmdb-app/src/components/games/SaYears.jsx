@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import GetTopRatingMovies from "../Tmdb_api/GetTopRatingMovies";
 import Header from "../Header";
+import FinishGame from "./FinishGame";
 import '../../styles/global/main.css';
 import '../../styles/global/header.css';
 import '../../styles/global/games.css';
@@ -13,6 +14,7 @@ function SaYears() {
     const [answered, setAnswered] = useState(false);
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [totalQuestions, setTotalQuestions] = useState(0);
+    const [finished, setFinished] = useState(false); // Add state for tracking game completion
 
     useEffect(() => {
         if (dataTopRates.length > 0) {
@@ -44,6 +46,8 @@ function SaYears() {
             setCurrentMovieIndex(currentMovieIndex + 1);
             setAnswered(false);
             setSelectedAnswer(null);
+        } else {
+            setFinished(true); // Set the game as finished when no more questions are available
         }
     };
 
@@ -70,58 +74,65 @@ function SaYears() {
             <GetTopRatingMovies setData={setDataTopRates} />
             <Header />
             <main>
-                <div id="hero">
-                    <p className="question">Quelle est l'année de sortie du film ci-dessous ?</p>
-                </div>
-
-                <div className="game-data">
-                    <div className="mode">Mode : Normal</div>
-                    <div className="score">Score : {correctAnswers}</div>
-                    <div className="questions">Question : {correctAnswers}/{totalQuestions}</div>
-                </div>
-
-                {dataTopRates.length > 0 && (
+                {finished ? ( // Conditionally render FinishGame if the game is finished
+                    <FinishGame
+                        totalQuestions={totalQuestions}
+                        correctAnswers={correctAnswers}
+                    />
+                ) : (
                     <>
-                        <div className="question-image">
-                            <img
-                                src={`https://image.tmdb.org/t/p/w500/${dataTopRates[currentMovieIndex].backdrop_path}`}
-                                alt={dataTopRates[currentMovieIndex].title}
-                                className=""
-                            />
+                        <div id="hero">
+                            <p className="question">Quelle est l'année de sortie du film ci-dessous ?</p>
                         </div>
 
-                        <div className="answers">
-                            {yearsForCurrentQuestion.map((year, index) => (
-                                <div
-                                    key={index}
-                                    className={`answer white ${answered && selectedAnswer === year ? (year === parseInt(dataTopRates[currentMovieIndex].release_date.split('-')[0]) ? "green" : "red") : ""}`}
-                                    onClick={() => handleAnswerClick(year)}
-                                >
-                                    <p>{year}</p>
+                        <div className="game-data">
+                            <div className="score">Score : {correctAnswers}</div>
+                            <div className="questions">Question : {correctAnswers}/{totalQuestions}</div>
+                        </div>
+
+                        {dataTopRates.length > 0 && (
+                            <>
+                                <div className="question-image">
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500/${dataTopRates[currentMovieIndex].backdrop_path}`}
+                                        alt={dataTopRates[currentMovieIndex].title}
+                                    />
                                 </div>
-                            ))}
+
+                                <div className="answers">
+                                    {yearsForCurrentQuestion.map((year, index) => (
+                                        <div
+                                            key={index}
+                                            className={`answer white ${answered && selectedAnswer === year ? (year === parseInt(dataTopRates[currentMovieIndex].release_date.split('-')[0]) ? "green" : "red") : ""}`}
+                                            onClick={() => handleAnswerClick(year)}
+                                        >
+                                            <p>{year}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+
+                        <div className="game-buttons">
+                            <button
+                                type="button"
+                                className="validation"
+                                onClick={validateAnswer}
+                                disabled={answered || selectedAnswer === null}
+                            >
+                                Valider la réponse
+                            </button>
+                            <button
+                                type="button"
+                                className="questions"
+                                onClick={switchQuestion}
+                                disabled={!answered}
+                            >
+                                Question suivante
+                            </button>
                         </div>
                     </>
                 )}
-
-                <div className="game-buttons">
-                    <button
-                        type="button"
-                        className="validation"
-                        onClick={validateAnswer}
-                        disabled={answered || selectedAnswer === null}
-                    >
-                        Valider la réponse
-                    </button>
-                    <button
-                        type="button"
-                        className="questions"
-                        onClick={switchQuestion}
-                        disabled={!answered}
-                    >
-                        Question suivante
-                    </button>
-                </div>
             </main>
         </div>
     );
