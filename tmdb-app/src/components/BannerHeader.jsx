@@ -11,7 +11,7 @@ function BannerHeader() {
                 <a href="rules.html">
                     <button class="btn rules"><NavLink to='/rules'>Comment Jouer ?</NavLink></button>
                 </a>
-                <a href="index.html#game-anchor">
+                <a href="#game-section">
                     <button class="btn launch">Lancer une partie</button>
                 </a>
             </div>
