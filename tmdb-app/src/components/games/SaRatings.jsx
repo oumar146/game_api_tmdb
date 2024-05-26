@@ -10,7 +10,6 @@ function SaRatings() {
   const [answered, setAnswered] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
-  const [clickedIndex, setClickedIndex] = useState(null);
   const [finished, setFinished] = useState(false); // New state for tracking game completion
 
   useEffect(() => {
@@ -25,7 +24,6 @@ function SaRatings() {
       setIndexMovie(indexMovie + 2);
       setAnswered(false);
       setSelectedAnswer(null);
-      setClickedIndex(null);
     } else {
       setFinished(true); // Set the game as finished when no more questions are available
     }
@@ -49,9 +47,6 @@ function SaRatings() {
     }
   };
 
-  const handleClick = (index) => {
-    setClickedIndex(index);
-  };
 
   return (
     <div>
@@ -79,7 +74,6 @@ function SaRatings() {
                     key={movie.id}
                     onClick={() => {
                       checkAnswer(index);
-                      handleClick(index);
                     }}
                     disabled={answered}
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

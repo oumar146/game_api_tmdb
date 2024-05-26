@@ -82,7 +82,7 @@ function SaYears() {
                 ) : (
                     <>
                         <div id="hero">
-                            <p className="question">Quelle est l'année de sortie du film ci-dessous ?</p>
+                            <p className="question">Quelle est l'année du film ci-dessous ?</p>
                         </div>
 
                         <div className="game-data">
@@ -96,6 +96,7 @@ function SaYears() {
                                     <img
                                         src={`https://image.tmdb.org/t/p/w500/${dataTopRates[currentMovieIndex].backdrop_path}`}
                                         alt={dataTopRates[currentMovieIndex].title}
+                                        className="img-large"
                                     />
                                 </div>
 
@@ -110,6 +111,8 @@ function SaYears() {
                                         </div>
                                     ))}
                                 </div>
+
+
                             </>
                         )}
 
