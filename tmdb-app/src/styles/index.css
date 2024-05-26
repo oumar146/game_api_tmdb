@@ -1,0 +1,171 @@
+img {
+  border-radius: 0px;
+}
+
+header {
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/hero.jpg");
+  background-size: cover;
+}
+/* red : e50914 rgb(229, 9, 20)*/
+
+#hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding-top: 80px; /* Adjust based on your navbar height */
+}
+
+#hero h1 {
+  margin-bottom: 20px;
+}
+
+#hero .btn {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.cta {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 18px;
+}
+
+.cta button {
+  cursor: pointer;
+  font-family: Oswald;
+  font-weight: bold;
+}
+
+.launch {
+  background-color: rgb(229, 9, 20);
+  color: white;
+}
+
+.launch:hover {
+  background-color: #cc0000;
+}
+
+.rules {
+  background-color: #242424;
+  color: #d3d3d3;
+}
+
+.rules:hover {
+  background-color: #464646;
+}
+
+/*Main part of the page */
+
+main {
+  padding-top: 20px;
+  text-align: center;
+  color: white;
+}
+
+main h2 {
+  text-align: center;
+  margin: 15px;
+}
+
+.games-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  /* width: 15rem; */
+  /* width: calc(100% / 5); */
+  width: 300px;
+  aspect-ratio: 3 / 4;
+  /* background: #f5f5f5; */
+  position: relative;
+  padding: 1.8rem;
+  border: 5px solid #494949;
+  transition: 0.5s ease-out;
+  overflow: visible;
+}
+
+.card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #cc0000;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+  cursor: pointer;
+}
+
+/*Hover*/
+.game:hover {
+  border-color: #cc0000;
+  box-shadow: 0 4px 18px 0 #cc0000;
+}
+
+.game:hover .card-button {
+  transform: translate(-50%, 50%);
+  opacity: 1;
+}
+
+.game .comment {
+  display: none;
+}
+
+.game:hover .comment {
+  display: block;
+  animation: fade-in 1s;
+}
+
+.game:not(:hover) .comment.did-fade-in {
+  display: block;
+  animation: fade-out 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

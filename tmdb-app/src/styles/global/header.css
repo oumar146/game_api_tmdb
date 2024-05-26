@@ -1,0 +1,19 @@
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+#hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding-top: 150px;
+}
+
+#hero p {
+  margin-bottom: 40px;
+}
