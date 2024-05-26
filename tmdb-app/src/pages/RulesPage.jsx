@@ -1,11 +1,17 @@
-import React from 'react';
-import Header from '../components/Header';
+import React from "react";
+import Header from "../components/Header";
+import RulesMain from "../components/mains/RulesMain";
+
+import "../styles/responsive/game-responsive.css";
+import "../styles/rules.css";
+
 function RulesPage() {
-    return (
-        <div>
-            <Header />
-        </div>
-    );
+  return (
+    <div>
+      <Header />
+      <RulesMain />
+    </div>
+  );
 }
 
 export default RulesPage;

@@ -5,7 +5,7 @@ img {
 header {
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/hero.jpg");
+    url("../assets/hero.jpg");
   background-size: cover;
 }
 /* red : e50914 rgb(229, 9, 20)*/
