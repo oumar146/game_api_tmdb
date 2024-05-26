@@ -1,10 +1,10 @@
-#Getting Started with This App
+# Getting Started with This App
 
-##Step 1: Install Dependencies
+## Step 1: Install Dependencies
 Run the following command to install all the necessary dependencies:
 npm install
 
-##Step 2: Configuration
+## Step 2: Configuration
 Create a config.json file in the src folder with the following structure:
 
 {
@@ -12,6 +12,6 @@ Create a config.json file in the src folder with the following structure:
 }
 
 Replace "your_TMDB_token_here" with your actual TMDB token.
-About the App
+# About the App
 
 This React application uses the TMDB API to create various games. Make sure your configuration is correct to ensure the app functions properly.
